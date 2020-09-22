@@ -1,0 +1,22 @@
+  .header {
+    display: flex;
+    justify-content: space-around;
+    background-color: white;  
+    border-bottom: 1px solid #DBDBDB;
+    padding: 2vh 0;
+  }
+
+  .header > img {
+    width: 20vw;
+    max-width: 120px;
+  }
+
+  .header > input {
+    outline: none;
+    border: none;
+  }
+
+  .header__links {
+    display: flex;
+    align-items: center;
+  }
