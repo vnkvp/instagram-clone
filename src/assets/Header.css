@@ -3,7 +3,7 @@
     justify-content: space-around;
     background-color: white;  
     border-bottom: 1px solid #DBDBDB;
-    padding: 2vh 0;
+    padding: 1vh 0
   }
 
   .header > img {
@@ -11,9 +11,24 @@
     max-width: 120px;
   }
 
-  .header > input {
+  .header__input {
+    display: flex;
+    align-items: center;
+    border: 1px solid #DBDBDB;
+    border-radius: 5px;
+    height: 4vh;
+    min-height: 25px;
+    margin-top: 1vh;
+  }
+
+  .header__searchicon {
+    color: #dbdbdb;
+  }
+
+  .header__input > input {
     outline: none;
     border: none;
+    text-align: center;
   }
 
   .header__links {
