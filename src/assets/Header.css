@@ -3,22 +3,27 @@
     justify-content: space-around;
     background-color: white;  
     border-bottom: 1px solid #DBDBDB;
-    padding: 1vh 0
+    padding: 1vh 0;
   }
 
   .header > img {
     width: 20vw;
-    max-width: 120px;
+    max-width: 100px;
+  }
+
+  .header__icon {
+    color: #262626;
   }
 
   .header__input {
     display: flex;
     align-items: center;
     border: 1px solid #DBDBDB;
-    border-radius: 5px;
+    border-radius: 3px;
     height: 4vh;
     min-height: 25px;
     margin-top: 1vh;
+    margin-right: 1vw;
   }
 
   .header__searchicon {
@@ -29,9 +34,14 @@
     outline: none;
     border: none;
     text-align: center;
+    width: 25vw;
+    max-width: 180px;
   }
 
   .header__links {
+    min-width: 150px;
+    width: 15vw;
+    justify-content: space-between;
     display: flex;
     align-items: center;
   }

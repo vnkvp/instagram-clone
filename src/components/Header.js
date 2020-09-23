@@ -18,11 +18,11 @@ function Header() {
                 <input type='text' placeholder='Search' />
             </div>
             <div className='header__links'>
-                <HomeRoundedIcon />
-                <NearMeOutlinedIcon />
-                <ExploreOutlinedIcon />
-                <FavoriteBorderRoundedIcon />
-                <Avatar />
+                <HomeRoundedIcon className='header__icon'/>
+                <NearMeOutlinedIcon className='header__icon' />
+                <ExploreOutlinedIcon className='header__icon' />
+                <FavoriteBorderRoundedIcon className='header__icon' />
+                <Avatar  />
             </div>
         </div>
     )
