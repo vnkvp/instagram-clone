@@ -1,10 +1,6 @@
-import firebase from 'firebase';
+import firebase from 'firebase'
 
-const db = firebaseApp.firestore();
-const auth = firebase.auth();
-const storage = firebase.storage();
-
-const firebaseApp = firebase.initializeApp({
+const firebaseConfig = {
     apiKey: "AIzaSyDCduSs5kVl82HQAW-v45JVphj-blQPH3U",
     authDomain: "instagram-clone-ed64e.firebaseapp.com",
     databaseURL: "https://instagram-clone-ed64e.firebaseio.com",
@@ -13,6 +9,12 @@ const firebaseApp = firebase.initializeApp({
     messagingSenderId: "176172643739",
     appId: "1:176172643739:web:cbb44cff6d2ec7d6ec1d3e",
     measurementId: "G-MPQKZ7MH2G"
-});
+};
 
-export default { db, auth, storage }
+const firebaseApp = firebase.initializeApp(firebaseConfig);
+
+const db = firebaseApp.firestore();
+const auth = firebase.auth();
+const storage = firebase.storage();
+
+export { db, auth, storage }
