@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Post from './components/Post';
-import { db } from './firebase';
+import { db, auth } from './firebase';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import './assets/App.css';
@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function App() {
-  
+
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -50,6 +50,12 @@ function App() {
     })
   }, [])
 
+  const signUp = (e) => {
+    e.preventDefault();
+    auth.createUserWithEmailAndPassword(email, password)
+    .catch((error) => alert(error.message))
+  }
+
   return (
     <div className='app'>
       <Modal
@@ -57,25 +63,30 @@ function App() {
         onClose={() => setOpen(false)}
       >
         <div style={modalStyle} className={classes.paper}>
-          <img
-            src='https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2F2%2F2a%2FInstagram_logo.svg%2F1280px-Instagram_logo.svg.png&f=1&nofb=1'
-            alt='logo' />
-          <Input placeholder='username'
-            type='text'
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <Input placeholder='e-mail'
-            type='text'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <Input placeholder='password'
-            type='password'
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <Button>Login</Button>
+          <form className='app__signup'>
+            <center>
+              <img
+                src='https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2F2%2F2a%2FInstagram_logo.svg%2F1280px-Instagram_logo.svg.png&f=1&nofb=1'
+                alt='logo'
+                className='app__loginImage' />
+            </center>
+            <Input placeholder='username'
+              type='text'
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            <Input placeholder='e-mail'
+              type='text'
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <Input placeholder='password'
+              type='password'
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <Button onClick={signUp} type='submit'>Sign Up</Button>
+          </form>
         </div>
       </Modal>
       { /* Header */}
