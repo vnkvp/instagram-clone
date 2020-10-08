@@ -57,16 +57,6 @@ function App() {
         // user logged in
         console.log(authUser);
         setUser(authUser);
-
-        if (authUser.displayName) {
-          // dont update username
-
-        } else {
-          return authUser.updateProfile({
-            displayName: username
-          });
-        }
-
       } else {
         // user logged out
         setUser(null);
@@ -77,6 +67,11 @@ function App() {
   const signUp = (e) => {
     e.preventDefault();
     auth.createUserWithEmailAndPassword(email, password)
+      .then((authUser) => {
+        return authUser.user.updateProfile({
+          displayName: username
+        })
+      })
       .catch((error) => alert(error.message))
   }
 
@@ -115,8 +110,11 @@ function App() {
       </Modal>
       { /* Header */}
       <Header />
-      <Button onClick={() => setOpen(true)}>Sign Up</Button>
+      {user ? (<Button onClick={() => auth.signOut()}>Logout</Button>
+      ) : (<Button onClick={() => setOpen(true)}>Sign Up</Button>
+        )}
       { /* Posts */}
+
       {posts.map(({ post, id }) => (
         <Post
           key={id}
