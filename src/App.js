@@ -37,6 +37,7 @@ function App() {
   const [posts, setPosts] = useState([]);
   const [open, setOpen] = useState(false);
   const [modalStyle] = useState(getModalStyle);
+  const [user, setUser] = useState(null);
   const classes = useStyles();
 
   //useEffect: running pieces of code on conditions.
@@ -50,10 +51,33 @@ function App() {
     })
   }, [])
 
+  useEffect(() => {
+    auth.onAuthStateChanged((authUser) => {
+      if (authUser) {
+        // user logged in
+        console.log(authUser);
+        setUser(authUser);
+
+        if (authUser.displayName) {
+          // dont update username
+
+        } else {
+          return authUser.updateProfile({
+            displayName: username
+          });
+        }
+
+      } else {
+        // user logged out
+        setUser(null);
+      }
+    })
+  }, [user, username])
+
   const signUp = (e) => {
     e.preventDefault();
     auth.createUserWithEmailAndPassword(email, password)
-    .catch((error) => alert(error.message))
+      .catch((error) => alert(error.message))
   }
 
   return (
