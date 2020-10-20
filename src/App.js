@@ -36,6 +36,7 @@ function App() {
   const [password, setPassword] = useState('');
   const [posts, setPosts] = useState([]);
   const [open, setOpen] = useState(false);
+  const [openSignIn, setOpenSignIn] = useState(false);
   const [modalStyle] = useState(getModalStyle);
   const [user, setUser] = useState(null);
   const classes = useStyles();
@@ -75,6 +76,11 @@ function App() {
       .catch((error) => alert(error.message))
   }
 
+  const signIn = (e) => {
+    e.preventDefault();
+
+  }
+
   return (
     <div className='app'>
       <Modal
@@ -108,12 +114,44 @@ function App() {
           </form>
         </div>
       </Modal>
-      { /* Header */}
+
+      <Modal
+        open={openSignIn}
+        onClose={() => setOpenSignIn(false)}
+      >
+        <div style={modalStyle} className={classes.paper}>
+          <form className='app__signup'>
+            <center>
+              <img
+                src='https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2F2%2F2a%2FInstagram_logo.svg%2F1280px-Instagram_logo.svg.png&f=1&nofb=1'
+                alt='logo'
+                className='app__loginImage' />
+            </center>
+            <Input placeholder='username'
+              type='text'
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            <Input placeholder='password'
+              type='password'
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <Button onClick={signIn} type='submit'>Sign In</Button>
+          </form>
+        </div>
+      </Modal>
+
       <Header />
+
       {user ? (<Button onClick={() => auth.signOut()}>Logout</Button>
-      ) : (<Button onClick={() => setOpen(true)}>Sign Up</Button>
-        )}
-      { /* Posts */}
+      ) : (
+          <div className='app__loginContainer'>
+            <Button onClick={() => setOpenSignIn(true)}>Sign In</Button>
+            <Button onClick={() => setOpen(true)}>Sign Up</Button>
+          </div>
+        )
+      }
 
       {posts.map(({ post, id }) => (
         <Post
